@@ -114,7 +114,8 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			path = req.URL.EscapedPath()
 		}
 		// Clean path to canonical form and redirect.
-		if p := cleanPath(path); p != path {
+		// DISABLE 301 Redirection for now (Simulate Apache Tomcat behaviour)
+		/* if p := cleanPath(path); p != path {
 
 			// Added 3 lines (Philip Schlump) - It was dropping the query string and #whatever from query.
 			// This matches with fix in go 1.2 r.c. 4 for same problem.  Go Issue:
@@ -126,7 +127,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			w.Header().Set("Location", p)
 			w.WriteHeader(http.StatusMovedPermanently)
 			return
-		}
+		}*/
 	}
 	var match RouteMatch
 	var handler http.Handler
